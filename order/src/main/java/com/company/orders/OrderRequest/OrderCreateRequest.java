@@ -5,13 +5,15 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
+import static com.company.orders.entity.constants.ApplicationConstants.*;
+
 public class OrderCreateRequest {
 
-        @NotNull
+        @NotNull(message = PRODUCT_ID_IS_REQUIRED)
     private Long productId;
-    @NotNull
+    @NotNull(message = NAME_IS_Quantity)
     private Integer quantity;
-    @NotNull
+    @NotNull(message = NAME_IS_Amount)
     private BigDecimal amount;
     private PaymentType paymentType;
 
