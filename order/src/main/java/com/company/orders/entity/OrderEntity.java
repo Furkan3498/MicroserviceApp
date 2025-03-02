@@ -17,6 +17,7 @@ public class OrderEntity {
     private Long id;
     private Long productId;
     private  Integer quantitiy;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private BigDecimal amount;
     private LocalDateTime createdAt;
