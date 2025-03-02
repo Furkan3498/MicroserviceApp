@@ -1,14 +1,17 @@
 package com.company.orders.OrderRequest;
 
 import com.company.orders.entity.enums.PaymentType;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
 public class OrderCreateRequest {
 
-
+        @NotNull
     private Long productId;
+    @NotNull
     private Integer quantity;
+    @NotNull
     private BigDecimal amount;
     private PaymentType paymentType;
 
