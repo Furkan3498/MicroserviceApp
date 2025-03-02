@@ -1,6 +1,7 @@
 package com.company.orders.mapper;
 
 import com.company.orders.OrderRequest.OrderCreateRequest;
+import com.company.orders.OrderResponse.OrderCreateResponse;
 import com.company.orders.entity.OrderEntity;
 import com.company.orders.entity.enums.OrderStatus;
 
@@ -19,5 +20,16 @@ public enum OrderMapper {
         orderEntity.setStatus(OrderStatus.PENDING);
         orderEntity.setCreatedAt(LocalDateTime.now());
         return  orderEntity;
+    }
+
+    public OrderCreateResponse mapToDto (OrderEntity orderEntity){
+        OrderCreateResponse orderCreateResponse = new OrderCreateResponse();
+        orderCreateResponse.setId(orderEntity.getId());
+        orderCreateResponse.setProductId(orderEntity.getProductId());
+        orderCreateResponse.setAmount(orderEntity.getAmount());
+        orderCreateResponse.setQuantitiy(orderEntity.getQuantitiy());
+        orderCreateResponse.setStatus(orderEntity.getStatus());
+        orderCreateResponse.setCreatedAt(orderEntity.getCreatedAt());
+        return orderCreateResponse;
     }
  }
