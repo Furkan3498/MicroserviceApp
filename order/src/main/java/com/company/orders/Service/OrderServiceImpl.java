@@ -22,6 +22,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(OrderCreateRequest orderCreateRequest) {
+        var entity= ORDER_MAPPER.mapToEntity(orderCreateRequest);
+       orderRepository.save(entity);
 
     }
 
