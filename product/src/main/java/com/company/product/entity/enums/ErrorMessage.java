@@ -14,6 +14,7 @@ public enum ErrorMessage {
     INSUFFICIENT_QUANTITY("Insufficient quantity for product with id: %s"),
     SERVER_ERROR("Unexpected error occurred");
 
+
     private final String message;
 
     ErrorMessage(String message) {

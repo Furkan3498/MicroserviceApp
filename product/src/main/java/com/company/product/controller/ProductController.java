@@ -2,6 +2,7 @@ package com.company.product.controller;
 
 
 import com.company.product.RequestDto.CreateProductRequest;
+import com.company.product.RequestDto.ReduceQuantityRequest;
 import com.company.product.responseDto.ProductResponse;
 import com.company.product.service.abstraction.ProductService;
 import jakarta.validation.Valid;
@@ -32,4 +33,15 @@ public class ProductController {
     public ProductResponse getProductById(@PathVariable Long id){
         return productService.getProductById(id);
     }
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void  reduceQuantity(@RequestBody @Valid ReduceQuantityRequest reduceQuantityRequest){
+        productService.reduceQuantity(reduceQuantityRequest);
+    }
+
+
+
+
 }

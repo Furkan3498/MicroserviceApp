@@ -15,6 +15,13 @@ public class ErrorHander {
         return new ErrorResponse(exception.getMessage());
     }
 
+    @ExceptionHandler(InsufficientQuantityException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handle(InsufficientQuantityException exception) {
+        return new ErrorResponse(exception.getMessage());
+    }
+
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
