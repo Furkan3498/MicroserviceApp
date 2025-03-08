@@ -35,7 +35,7 @@ public class ProductController {
     }
 
 
-    @PostMapping
+    @PostMapping("/reduce-quantity")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void  reduceQuantity(@RequestBody @Valid ReduceQuantityRequest reduceQuantityRequest){
         productService.reduceQuantity(reduceQuantityRequest);
