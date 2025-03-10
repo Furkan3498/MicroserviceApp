@@ -10,10 +10,10 @@ public class CustomErrorDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String s, Response response) {
         if (response.status() >= 400 && response.status()<=499){
-            return new CustomExcepiton("error request");
+            return new CustomExcepiton("Client error occurred while making the request");
         }
         if (response.status() >=500  && response.status() <=599){
-            return  new CustomExcepiton("server error exception");
+            return  new CustomExcepiton("Server error occurred while making the request");
         }
         return defaultErrorDecoder.decode(s,response);
     }
