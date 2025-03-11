@@ -15,7 +15,6 @@ public enum OrderMapper {
     public OrderEntity mapToEntity(OrderCreateRequest orderCreateRequest) {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setProductId(orderCreateRequest.getProductId());
-        orderEntity.setAmount(orderCreateRequest.getAmount());
         orderEntity.setQuantitiy(orderCreateRequest.getQuantity());
         orderEntity.setStatus(OrderStatus.PENDING);
         orderEntity.setCreatedAt(LocalDateTime.now());

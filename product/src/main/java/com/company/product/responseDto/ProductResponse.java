@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 public class ProductResponse {
 
 

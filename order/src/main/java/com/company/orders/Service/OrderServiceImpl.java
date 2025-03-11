@@ -3,14 +3,17 @@ package com.company.orders.Service;
 import com.company.orders.OrderRepo.OrderRepository;
 import com.company.orders.OrderRequest.OrderCreateRequest;
 import com.company.orders.OrderResponse.OrderCreateResponse;
+import com.company.orders.OrderResponse.client.ProductResponse;
 import com.company.orders.Service.abstraction.OrderService;
 import com.company.orders.client.ProductClient;
 import com.company.orders.entity.OrderEntity;
-import com.company.orders.entity.client.ReduceQuantityRequest;
+import com.company.orders.OrderRequest.client.ReduceQuantityRequest;
 import com.company.orders.entity.enums.OrderStatus;
 import com.company.orders.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 import static com.company.orders.entity.enums.ErrorMessage.ORDER_NOT_FOUND;
 import static com.company.orders.mapper.OrderMapper.ORDER_MAPPER;
@@ -31,11 +34,16 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public void createOrder(OrderCreateRequest orderCreateRequest) {
         OrderEntity orderentity = ORDER_MAPPER.mapToEntity(orderCreateRequest);
+        ProductResponse productById = productClient.getProductById(orderCreateRequest.getProductId());
+
+        orderentity.setAmount(productById.getPrice()
+                .multiply(BigDecimal
+                        .valueOf(orderCreateRequest.getQuantity())));
         ReduceQuantityRequest reduceQuantityRequest = new ReduceQuantityRequest(
                 orderCreateRequest.getProductId(),
                 orderCreateRequest.getQuantity()
         );
-
+        orderRepository.save(orderentity);
         try {
             productClient.reduceQuantity(reduceQuantityRequest);
             orderentity.setStatus(OrderStatus.APPROVED);
@@ -44,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
             orderentity.setStatus(OrderStatus.REJECTED);
         }
 
-        orderRepository.save(orderentity);
+
 
     }
 

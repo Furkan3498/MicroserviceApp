@@ -1,4 +1,4 @@
-package com.company.orders.entity.client;
+package com.company.orders.OrderRequest.client;
 
 public class ReduceQuantityRequest {
 
