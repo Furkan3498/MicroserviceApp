@@ -1,5 +1,6 @@
 package com.company.orders.OrderResponse;
 
+import com.company.orders.OrderResponse.client.ProductResponse;
 import com.company.orders.entity.enums.OrderStatus;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -20,16 +21,19 @@ public class OrderCreateResponse {
     private BigDecimal amount;
     private LocalDateTime createdAt;
 
+    private ProductResponse product;
+
     public OrderCreateResponse() {
     }
 
-    public OrderCreateResponse(Long id, Long productId, Integer quantitiy, OrderStatus status, BigDecimal amount, LocalDateTime createdAt) {
+    public OrderCreateResponse(Long id, Long productId, Integer quantitiy, OrderStatus status, BigDecimal amount, LocalDateTime createdAt, ProductResponse product) {
         this.id = id;
         this.productId = productId;
         this.quantitiy = quantitiy;
         this.status = status;
         this.amount = amount;
         this.createdAt = createdAt;
+        this.product = product;
     }
 
     public Long getId() {
@@ -72,6 +76,14 @@ public class OrderCreateResponse {
         this.amount = amount;
     }
 
+    public ProductResponse getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductResponse product) {
+        this.product = product;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -89,6 +101,7 @@ public class OrderCreateResponse {
                 ", status=" + status +
                 ", amount=" + amount +
                 ", createdAt=" + createdAt +
+                ", product=" + product +
                 '}';
     }
 }

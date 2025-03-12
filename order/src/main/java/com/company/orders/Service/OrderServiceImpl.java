@@ -68,7 +68,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderCreateResponse getOrderById(Long id) {
-      return  orderRepository.findById(id).map(ORDER_MAPPER::mapToDto).orElseThrow(()-> new NotFoundException(format(ORDER_NOT_FOUND.getMessage()
-      ,id)));
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(()-> new NotFoundException(format(
+                ORDER_NOT_FOUND.getMessage(),
+                id
+        )));
+
+        ProductResponse productById = productClient.getProductById(orderEntity.getProductId());
+        return ORDER_MAPPER.mapToDto(orderEntity,productById);
+
     }
 }
