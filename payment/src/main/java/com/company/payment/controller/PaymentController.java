@@ -1,5 +1,6 @@
 package com.company.payment.controller;
 
+import com.company.payment.ResponseDTO.PaymentResponse;
 import com.company.payment.requestDto.CreatePaymentRequest;
 import com.company.payment.service.abstraction.PaymentService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class PaymentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     //responseEntity yap
-    public void  pay(@RequestBody CreatePaymentRequest createPaymentRequest){
-        paymentService.pay(createPaymentRequest);
+    public ResponseEntity<PaymentResponse> pay(@RequestBody CreatePaymentRequest createPaymentRequest){
+        return  ResponseEntity.ok(paymentService.pay(createPaymentRequest).getBody());
     }
 }

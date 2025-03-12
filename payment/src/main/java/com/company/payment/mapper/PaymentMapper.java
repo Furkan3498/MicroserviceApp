@@ -5,6 +5,7 @@ import com.company.payment.entity.enums.PaymentStatus;
 import com.company.payment.requestDto.CreatePaymentRequest;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public enum PaymentMapper {
 
@@ -12,7 +13,7 @@ public enum PaymentMapper {
 
     public PaymentEntity mapToEntity(CreatePaymentRequest createPaymentRequest){
         PaymentEntity paymentEntity = new PaymentEntity();
-        paymentEntity.setReferenceNumber(createPaymentRequest.getReferenceNumber());
+        paymentEntity.setReferenceNumber(UUID.randomUUID().toString());
         paymentEntity.setOrderId(createPaymentRequest.getOrderId());
         paymentEntity.setAmount(createPaymentRequest.getAmount());
         paymentEntity.setPaymentType(createPaymentRequest.getPaymentType());

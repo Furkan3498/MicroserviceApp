@@ -1,10 +1,12 @@
 package com.company.payment.service;
 
+import com.company.payment.ResponseDTO.PaymentResponse;
 import com.company.payment.entity.PaymentEntity;
 import com.company.payment.mapper.PaymentMapper;
 import com.company.payment.repository.PaymentRepository;
 import com.company.payment.requestDto.CreatePaymentRequest;
 import com.company.payment.service.abstraction.PaymentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,8 +19,10 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void pay(CreatePaymentRequest createPaymentRequest) {
+    public ResponseEntity<PaymentResponse> pay(CreatePaymentRequest createPaymentRequest) {
         PaymentEntity paymentEntity = PaymentMapper.PAYMENT_MAPPER.mapToEntity(createPaymentRequest);
-        paymentRepository.save(paymentEntity);
+     paymentRepository.save(paymentEntity);
+
+     return   ResponseEntity.ok(new PaymentResponse(paymentEntity.getId()));
     }
 }

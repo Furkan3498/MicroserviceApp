@@ -3,17 +3,18 @@ package com.company.payment.requestDto;
 import com.company.payment.entity.enums.PaymentType;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class CreatePaymentRequest {
     private Long orderId;
     private PaymentType paymentType;
     private BigDecimal amount;
-    private String referenceNumber;
+    private UUID referenceNumber;
 
     public CreatePaymentRequest() {
     }
 
-    public CreatePaymentRequest(Long orderId, PaymentType paymentType, BigDecimal amount, String referenceNumber) {
+    public CreatePaymentRequest(Long orderId, PaymentType paymentType, BigDecimal amount, UUID referenceNumber) {
         this.orderId = orderId;
         this.paymentType = paymentType;
         this.amount = amount;
@@ -44,11 +45,11 @@ public class CreatePaymentRequest {
         this.amount = amount;
     }
 
-    public String getReferenceNumber() {
+    public UUID getReferenceNumber() {
         return referenceNumber;
     }
 
-    public void setReferenceNumber(String referenceNumber) {
+    public void setReferenceNumber(UUID referenceNumber) {
         this.referenceNumber = referenceNumber;
     }
 }
