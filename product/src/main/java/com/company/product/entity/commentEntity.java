@@ -2,12 +2,13 @@ package com.company.product.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "comments")
 
-public class commentEntity {
+public class CommentEntity {
 
 
 
@@ -17,27 +18,29 @@ public class commentEntity {
 
         private Long id;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name="products_id", nullable=false)
-        private ProductEntity productEntity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id",referencedColumnName = "id", nullable = false)
+    private ProductEntity product;
 
 
 
-         String title;
+
+    private   String title;
     @Lob
          @Column(columnDefinition="text")
     private  String text;
 
-    @Temporal(TemporalType.TIMESTAMP)
-            private Date createDate;
+    private LocalDateTime createDate;
 
 
-    public commentEntity() {
+
+
+    public CommentEntity() {
     }
 
-    public commentEntity(Long id, ProductEntity productEntity, String title, String text, Date createDate) {
+    public CommentEntity(Long id, ProductEntity product, String title, String text, LocalDateTime createDate) {
         this.id = id;
-        this.productEntity = productEntity;
+        this.product = product;
         this.title = title;
         this.text = text;
         this.createDate = createDate;
@@ -52,11 +55,11 @@ public class commentEntity {
     }
 
     public ProductEntity getProductEntity() {
-        return productEntity;
+        return product;
     }
 
     public void setProductEntity(ProductEntity productEntity) {
-        this.productEntity = productEntity;
+        this.product = productEntity;
     }
 
     public String getTitle() {
@@ -75,11 +78,11 @@ public class commentEntity {
         this.text = text;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -87,7 +90,7 @@ public class commentEntity {
     public String toString() {
         return "commentEntity{" +
                 "id=" + id +
-                ", productEntity=" + productEntity +
+                ", productEntity=" + product +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
                 ", createDate=" + createDate +

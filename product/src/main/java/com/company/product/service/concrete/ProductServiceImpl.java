@@ -51,6 +51,19 @@ public class ProductServiceImpl implements ProductService {
         }
 
     }
+    protected ProductEntity getProductByIdForComment(Long id) {
+        Optional<ProductEntity> optionalProduct = productRepository.findById(id);
+
+        if (optionalProduct.isPresent()) {
+            ProductEntity product = optionalProduct.get();
+          return product;
+
+        } else {
+            String errorMessage = String.format(PRODUCT_NOT_FOUND.getMessage(), id);
+            throw new NotFoundException(errorMessage);
+        }
+
+    }
 
     @Override
     public void reduceQuantity(ReduceQuantityRequest reduceQuantityRequest) {
