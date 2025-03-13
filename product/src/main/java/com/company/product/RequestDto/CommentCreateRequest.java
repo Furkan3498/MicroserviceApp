@@ -3,7 +3,6 @@ package com.company.product.RequestDto;
 public class CommentCreateRequest {
 
 
-    private Long id;
     private Long productId;
 
     private String text;
@@ -11,19 +10,13 @@ public class CommentCreateRequest {
     public CommentCreateRequest() {
     }
 
-    public CommentCreateRequest(Long id, Long productId, String text) {
-        this.id = id;
+    public CommentCreateRequest( Long productId, String text) {
+
         this.productId = productId;
         this.text = text;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getProductId() {
         return productId;
@@ -44,7 +37,7 @@ public class CommentCreateRequest {
     @Override
     public String toString() {
         return "CommentCreateRequest{" +
-                "id=" + id +
+
                 ", productId=" + productId +
                 ", text='" + text + '\'' +
                 '}';

@@ -29,8 +29,27 @@ public class ProductEntity {
     private BigDecimal price;
     @NotNull(message = ApplicationConstants.NAME_IS_Quantity)
     private Integer quantity;
-
+    @Lob
+    @Column(columnDefinition="text")
+    private  String text;
     public ProductEntity() {
+    }
+
+    public ProductEntity(Long id, String name, String description, BigDecimal price, Integer quantity, String text) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public ProductEntity(Long id, String name, String description, BigDecimal price, Integer quantity) {

@@ -2,8 +2,11 @@ package com.company.product.mapper;
 
 import com.company.product.RequestDto.CreateProductRequest;
 import com.company.product.entity.ProductEntity;
+import com.company.product.responseDto.CommentResponse;
 import com.company.product.responseDto.ProductResponse;
+import com.company.product.service.concrete.CommentService;
 
+import java.util.List;
 import java.util.function.Function;
 
 public enum ProductMapper {
@@ -25,7 +28,7 @@ public enum ProductMapper {
 
     }
 
-    public ProductResponse buildProductResponse(ProductEntity productEntity){
+    public ProductResponse buildProductResponse(ProductEntity productEntity, CommentResponse  commentResponse){
 
         ProductResponse productResponse = new ProductResponse();
         productResponse.setName(productEntity.getName());
@@ -33,6 +36,8 @@ public enum ProductMapper {
         productResponse.setPrice(productEntity.getPrice());
         productResponse.setDescription(productEntity.getDescription());
         productResponse.setQuantity(productEntity.getQuantity());
+
+        productResponse.setCommentResponse(commentResponse);
         return productResponse;
 
 

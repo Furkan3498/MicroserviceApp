@@ -7,7 +7,7 @@ public class CommentResponse {
 
 
     private Long id;
-    private ProductEntity name;
+    private Long productId;
     private String text;
 
     public CommentResponse(CommentEntity comment) {
@@ -16,9 +16,9 @@ public class CommentResponse {
     public CommentResponse() {
     }
 
-    public CommentResponse(Long id, ProductEntity name, String text) {
+    public CommentResponse(Long id, Long productId, String text) {
         this.id = id;
-        this.name = name;
+        this.productId = productId;
         this.text = text;
     }
 
@@ -30,12 +30,12 @@ public class CommentResponse {
         this.id = id;
     }
 
-    public ProductEntity getName() {
-        return name;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setName(ProductEntity name) {
-        this.name = name;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public String getText() {

@@ -2,17 +2,20 @@ package com.company.product.service.concrete;
 
 import com.company.product.RequestDto.CreateProductRequest;
 import com.company.product.RequestDto.ReduceQuantityRequest;
+import com.company.product.entity.CommentEntity;
 import com.company.product.entity.ProductEntity;
-import com.company.product.entity.enums.ErrorMessage;
 import com.company.product.exception.InsufficientQuantityException;
 import com.company.product.mapper.ProductMapper;
 import com.company.product.exception.NotFoundException;
+import com.company.product.repository.CommentRepository;
 import com.company.product.repository.ProductRepository;
+import com.company.product.responseDto.CommentResponse;
 import com.company.product.responseDto.ProductResponse;
 import com.company.product.service.abstraction.ProductService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.company.product.entity.enums.ErrorMessage.INSUFFICIENT_QUANTITY;
@@ -24,9 +27,13 @@ import static java.lang.String.*;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final CommentRepository commentRepository;
+    private final CommentService commentService;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository,  CommentRepository commentRepository,@Lazy CommentService commentService) {
         this.productRepository = productRepository;
+        this.commentRepository = commentRepository;
+        this.commentService = commentService;
     }
 
     @Override
@@ -40,9 +47,10 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse getProductById(Long id) {
         Optional<ProductEntity> optionalProduct = productRepository.findById(id);
 
+        CommentResponse commentResponse= new CommentResponse();
         if (optionalProduct.isPresent()) {
             ProductEntity product = optionalProduct.get();
-            ProductResponse productResponse = ProductMapper.PRODUCT_MAPPER.buildProductResponse(product); //Aslında  ProductResponse productResponse gerek yok
+            ProductResponse productResponse = ProductMapper.PRODUCT_MAPPER.buildProductResponse(product , commentResponse); //Aslında  ProductResponse productResponse gerek yok
             return productResponse;
 
         } else {
@@ -87,13 +95,7 @@ public class ProductServiceImpl implements ProductService {
 
 
 
-    private ProductResponse fetchProduct (Long id){
-        return productRepository.findById(id)
-                .map(ProductMapper.PRODUCT_MAPPER::buildProductResponse)
-                .orElseThrow(()-> new NotFoundException(format(PRODUCT_NOT_FOUND.getMessage(),
-                        id
-                )));
-    }
+
     }
 
 

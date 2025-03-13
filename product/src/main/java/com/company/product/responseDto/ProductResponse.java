@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-
+import java.util.List;
 
 
 public class ProductResponse {
@@ -18,6 +18,16 @@ public class ProductResponse {
     private String description;
     private BigDecimal price;
     private Integer quantity;
+
+    private CommentResponse commentResponse;
+
+    public CommentResponse getCommentResponse() {
+        return commentResponse;
+    }
+
+    public void setCommentResponse(CommentResponse commentResponseList) {
+        this.commentResponse = commentResponseList;
+    }
 
     public Long getId() {
         return id;

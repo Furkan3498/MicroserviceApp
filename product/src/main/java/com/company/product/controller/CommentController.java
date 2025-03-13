@@ -2,39 +2,44 @@ package com.company.product.controller;
 
 import com.company.product.RequestDto.CommentCreateRequest;
 import com.company.product.entity.CommentEntity;
+import com.company.product.repository.CommentRepository;
 import com.company.product.responseDto.CommentResponse;
 import com.company.product.service.concrete.CommentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/comments")
+
 public class CommentController {
 
     private final CommentService commentService;
 
-    public CommentController(CommentService commentService) {
+    private final CommentRepository commentRepository;
+    public CommentController(CommentService commentService, CommentRepository commentRepository) {
         this.commentService = commentService;
+        this.commentRepository = commentRepository;
     }
 
-
-    @GetMapping
-    public List<CommentResponse> getAllComments(@RequestParam Optional<Long> productId
-                                               ) {
-        return commentService.getAllCommentsWithParam(productId);
-    }
 
     @PostMapping
-    public CommentEntity createOneComment(@RequestBody CommentCreateRequest request) {
-        return commentService.createOneComment(request);
+    public CommentResponse getAllComments(@RequestBody  CommentCreateRequest request
+                                               ) {
+        return commentService.getAllCommentsWithParam(request);
     }
 
-    @GetMapping("/{commentId}")
-    public CommentResponse getOneComment(@PathVariable Long commentId) {
-        return  commentService.getOneCommentById(commentId);
+    @GetMapping("/{id}")
+    public CommentEntity getComment(@PathVariable Long id){
+        return commentRepository.findById(id).orElse(new CommentEntity());
     }
+
+    @GetMapping
+    public List<CommentEntity> getAllComments(){
+
+        return  commentRepository.findAll();
+    }
+
 
 
 
