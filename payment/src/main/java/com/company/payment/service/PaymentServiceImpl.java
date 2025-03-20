@@ -2,6 +2,7 @@ package com.company.payment.service;
 
 import com.company.payment.ResponseDTO.PaymentResponse;
 import com.company.payment.entity.PaymentEntity;
+import com.company.payment.exception.NotFoundException;
 import com.company.payment.mapper.PaymentMapper;
 import com.company.payment.repository.PaymentRepository;
 import com.company.payment.requestDto.CreatePaymentRequest;
@@ -28,6 +29,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentResponse getPaymentByOrderId(Long orderId) {
-        return null;
+        return paymentRepository.findByOrderId(orderId)
+                .map(PaymentMapper.PAYMENT_MAPPER.buildPaymentResponse(orderId))
+                .orElseThrow(()-> new NotFoundException(
+                        "Payment not found with order id" + orderId
+                ));
     }
 }
