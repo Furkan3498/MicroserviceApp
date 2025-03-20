@@ -2,6 +2,7 @@ package com.company.orders.mapper;
 
 import com.company.orders.OrderRequest.OrderCreateRequest;
 import com.company.orders.OrderResponse.OrderCreateResponse;
+import com.company.orders.OrderResponse.client.PaymentResponse;
 import com.company.orders.OrderResponse.client.ProductResponse;
 import com.company.orders.entity.OrderEntity;
 import com.company.orders.entity.enums.OrderStatus;
@@ -22,7 +23,7 @@ public enum OrderMapper {
         return  orderEntity;
     }
 
-    public OrderCreateResponse mapToDto (OrderEntity orderEntity, ProductResponse productResponse){
+    public OrderCreateResponse mapToDto (OrderEntity orderEntity, ProductResponse productResponse, PaymentResponse paymentResponse){
         OrderCreateResponse orderCreateResponse = new OrderCreateResponse();
         orderCreateResponse.setId(orderEntity.getId());
         orderCreateResponse.setProductId(orderEntity.getProductId());
@@ -31,6 +32,7 @@ public enum OrderMapper {
         orderCreateResponse.setStatus(orderEntity.getStatus());
         orderCreateResponse.setCreatedAt(orderEntity.getCreatedAt());
         orderCreateResponse.setProduct(productResponse);
+        orderCreateResponse.setPaymentResponse(paymentResponse);
         return orderCreateResponse;
     }
  }

@@ -1,5 +1,6 @@
 package com.company.orders.OrderResponse.client;
 
+import com.company.orders.entity.enums.PaymentStatus;
 import com.company.orders.entity.enums.PaymentType;
 
 import java.time.LocalDateTime;

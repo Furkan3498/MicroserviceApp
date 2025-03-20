@@ -10,6 +10,8 @@ import com.company.payment.service.abstraction.PaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import static com.company.payment.mapper.PaymentMapper.PAYMENT_MAPPER;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -21,7 +23,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public ResponseEntity<PaymentResponse> pay(CreatePaymentRequest createPaymentRequest) {
-        PaymentEntity paymentEntity = PaymentMapper.PAYMENT_MAPPER.mapToEntity(createPaymentRequest);
+        PaymentEntity paymentEntity = PAYMENT_MAPPER.mapToEntity(createPaymentRequest);
      paymentRepository.save(paymentEntity);
 
      return   ResponseEntity.ok(new PaymentResponse(paymentEntity.getId()));
@@ -30,7 +32,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public PaymentResponse getPaymentByOrderId(Long orderId) {
         return paymentRepository.findByOrderId(orderId)
-                .map(PaymentMapper.PAYMENT_MAPPER.buildPaymentResponse(orderId))
+                .map(PAYMENT_MAPPER::buildPaymentResponse)
                 .orElseThrow(()-> new NotFoundException(
                         "Payment not found with order id" + orderId
                 ));

@@ -4,6 +4,7 @@ import com.company.orders.OrderRepo.OrderRepository;
 import com.company.orders.OrderRequest.OrderCreateRequest;
 import com.company.orders.OrderRequest.client.CreatePaymentRequest;
 import com.company.orders.OrderResponse.OrderCreateResponse;
+import com.company.orders.OrderResponse.client.PaymentResponse;
 import com.company.orders.OrderResponse.client.ProductResponse;
 import com.company.orders.Service.abstraction.OrderService;
 import com.company.orders.client.PaymentClient;
@@ -74,7 +75,9 @@ public class OrderServiceImpl implements OrderService {
         )));
 
         ProductResponse productById = productClient.getProductById(orderEntity.getProductId());
-        return ORDER_MAPPER.mapToDto(orderEntity,productById);
+
+        PaymentResponse paymentResponse = paymentClient.getPaymentByOrderId(orderEntity.getId());
+        return ORDER_MAPPER.mapToDto(orderEntity,productById,paymentResponse);
 
     }
 }
