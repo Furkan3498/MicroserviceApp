@@ -14,26 +14,16 @@ public class ErrorHander {
         return new ErrorResponse(exception.getMessage());
     }
 
-    @ExceptionHandler(InsufficientQuantityException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handle(InsufficientQuantityException exception) {
-        return new ErrorResponse(exception.getMessage());
-    }
-
-
-
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handle(Exception exception) {
-        return new ErrorResponse("Unexpected error occurred. Please try again later");
-    }
-
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handle(MethodArgumentNotValidException exception) {
         return new ErrorResponse(exception.getBindingResult().getFieldError().getDefaultMessage());
+    }
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handle(Exception exception) {
+        return new ErrorResponse("Unexpected error occurred. Please try again later");
     }
 
 }
