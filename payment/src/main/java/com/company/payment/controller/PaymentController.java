@@ -22,4 +22,10 @@ public class PaymentController {
     public ResponseEntity<PaymentResponse> pay(@RequestBody CreatePaymentRequest createPaymentRequest){
         return  ResponseEntity.ok(paymentService.pay(createPaymentRequest).getBody());
     }
+
+
+    @GetMapping("/order/{orderId}")
+    public PaymentResponse getPaymentByOrderId  (@PathVariable Long orderId){
+        return paymentService.getPaymentByOrderId(orderId);
+    }
 }

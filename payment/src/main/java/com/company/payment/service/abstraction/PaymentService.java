@@ -6,4 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface PaymentService {
     ResponseEntity<PaymentResponse> pay(CreatePaymentRequest createPaymentRequest);
+
+    PaymentResponse getPaymentByOrderId(Long orderId);
 }

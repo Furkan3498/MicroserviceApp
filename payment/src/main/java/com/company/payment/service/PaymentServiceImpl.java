@@ -25,4 +25,9 @@ public class PaymentServiceImpl implements PaymentService {
 
      return   ResponseEntity.ok(new PaymentResponse(paymentEntity.getId()));
     }
+
+    @Override
+    public PaymentResponse getPaymentByOrderId(Long orderId) {
+        return null;
+    }
 }
