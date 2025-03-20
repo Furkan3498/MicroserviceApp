@@ -37,7 +37,22 @@ public enum ProductMapper {
         productResponse.setDescription(productEntity.getDescription());
         productResponse.setQuantity(productEntity.getQuantity());
 
-        productResponse.setCommentResponse(commentResponse);
+      //  productResponse.setCommentResponse(commentResponse);
+        return productResponse;
+
+
+
+    }
+    public ProductResponse buildProductResponseforComment(ProductEntity productEntity, CommentResponse  commentResponse){
+
+        ProductResponse productResponse = new ProductResponse();
+        productResponse.setName(productEntity.getName());
+        productResponse.setId(productEntity.getId());
+        productResponse.setPrice(productEntity.getPrice());
+        productResponse.setDescription(productEntity.getDescription());
+        productResponse.setQuantity(productEntity.getQuantity());
+
+      //  productResponse.setCommentResponse(commentResponse);
         return productResponse;
 
 

@@ -19,14 +19,14 @@ public class ProductResponse {
     private BigDecimal price;
     private Integer quantity;
 
-    private CommentResponse commentResponse;
+    private List<CommentResponse> commentResponseList;
 
-    public CommentResponse getCommentResponse() {
-        return commentResponse;
+    public List<CommentResponse> getCommentResponseList() {
+        return commentResponseList;
     }
 
-    public void setCommentResponse(CommentResponse commentResponseList) {
-        this.commentResponse = commentResponseList;
+    public void setCommentResponseList(List<CommentResponse> commentResponseList) {
+        this.commentResponseList = commentResponseList;
     }
 
     public Long getId() {
