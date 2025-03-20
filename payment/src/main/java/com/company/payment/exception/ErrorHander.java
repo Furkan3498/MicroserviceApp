@@ -15,11 +15,7 @@ public class ErrorHander {
     }
 
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handle(MethodArgumentNotValidException exception) {
-        return new ErrorResponse(exception.getBindingResult().getFieldError().getDefaultMessage());
-    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handle(Exception exception) {
