@@ -31,8 +31,6 @@ public class PaymentEntity {
     @CreationTimestamp
     private LocalDateTime localDateTime;
 
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
 
     public PaymentEntity() {
     }
@@ -45,7 +43,6 @@ public class PaymentEntity {
         this.paymentStatus = paymentStatus;
         this.amount = amount;
         this.localDateTime = localDateTime;
-        this.updatedAt = updatedAt;
     }
 
     public Long getId() {
@@ -104,13 +101,7 @@ public class PaymentEntity {
         this.localDateTime = localDateTime;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -135,7 +126,6 @@ public class PaymentEntity {
                 ", paymentStatus=" + paymentStatus +
                 ", amount=" + amount +
                 ", localDateTime=" + localDateTime +
-                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
