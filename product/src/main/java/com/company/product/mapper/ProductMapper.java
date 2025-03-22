@@ -28,7 +28,7 @@ public enum ProductMapper {
 
     }
 
-    public ProductResponse buildProductResponse(ProductEntity productEntity, CommentResponse  commentResponse){
+    public ProductResponse buildProductResponse(ProductEntity productEntity){
 
         ProductResponse productResponse = new ProductResponse();
         productResponse.setName(productEntity.getName());

@@ -1,11 +1,14 @@
 package com.company.product.exception;
 
 
+import com.company.product.entity.enums.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.rmi.ServerError;
 
 @RestControllerAdvice
 public class ErrorHander {
@@ -26,7 +29,7 @@ public class ErrorHander {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handle(Exception exception) {
-        return new ErrorResponse("Unexpected error occurred. Please try again later");
+        return new ErrorResponse(ErrorMessage.SERVER_ERROR.getMessage());
     }
 
 

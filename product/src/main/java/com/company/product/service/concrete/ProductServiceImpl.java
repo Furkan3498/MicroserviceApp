@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import static com.company.product.entity.enums.ErrorMessage.INSUFFICIENT_QUANTITY;
 import static com.company.product.entity.enums.ErrorMessage.PRODUCT_NOT_FOUND;
+import static com.company.product.mapper.ProductMapper.PRODUCT_MAPPER;
 import static java.lang.String.*;
 
 @Service
@@ -39,24 +40,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void createProduct(CreateProductRequest createProductRequest) {
 
-        productRepository.save(ProductMapper.PRODUCT_MAPPER.buildProductEntity(createProductRequest));
+        productRepository.save(PRODUCT_MAPPER.buildProductEntity(createProductRequest));
 
     }
 
     @Override
     public ProductResponse getProductById(Long id) {
-        Optional<ProductEntity> optionalProduct = productRepository.findById(id);
 
-        CommentResponse commentResponse= new CommentResponse();
-        if (optionalProduct.isPresent()) {
-            ProductEntity product = optionalProduct.get();
-            ProductResponse productResponse = ProductMapper.PRODUCT_MAPPER.buildProductResponse(product , commentResponse); //Aslında  ProductResponse productResponse gerek yok
-            return productResponse;
 
-        } else {
-            String errorMessage = String.format(PRODUCT_NOT_FOUND.getMessage(), id);
-            throw new NotFoundException(errorMessage);
-        }
+        return productRepository.findById(id)
+                .map(PRODUCT_MAPPER::buildProductResponse)
+                .orElseThrow(() -> new NotFoundException(
+                        format(PRODUCT_NOT_FOUND.getMessage(),
+                                id)
+                ));
+
+
 
     }
     protected ProductEntity getProductByIdForComment(Long id) {
