@@ -6,8 +6,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -29,6 +32,12 @@ public class ProductEntity {
     private BigDecimal price;
     @NotNull(message = ApplicationConstants.NAME_IS_Quantity)
     private Integer quantity;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
     @Lob
     @Column(columnDefinition="text")
     private  String text;
@@ -42,6 +51,33 @@ public class ProductEntity {
         this.price = price;
         this.quantity = quantity;
         this.text = text;
+    }
+
+    public ProductEntity(Long id, String name, String description, BigDecimal price, Integer quantity, LocalDateTime createdAt, LocalDateTime updatedAt, String text) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.text = text;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getText() {
