@@ -2,6 +2,7 @@ package com.company.payment.service;
 
 import com.company.payment.ResponseDTO.PaymentResponse;
 import com.company.payment.entity.PaymentEntity;
+import com.company.payment.entity.enums.ErrorMessage;
 import com.company.payment.exception.NotFoundException;
 import com.company.payment.mapper.PaymentMapper;
 import com.company.payment.repository.PaymentRepository;
@@ -10,6 +11,7 @@ import com.company.payment.service.abstraction.PaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import static com.company.payment.entity.enums.ErrorMessage.PAYMENT_NOT_FOUND;
 import static com.company.payment.mapper.PaymentMapper.PAYMENT_MAPPER;
 
 @Service
@@ -34,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentRepository.findByOrderId(orderId)
                 .map(PAYMENT_MAPPER::buildPaymentResponse)
                 .orElseThrow(()-> new NotFoundException(
-                        "Payment not found with order id" + orderId
+                       String.format(PAYMENT_NOT_FOUND.getMessage(),orderId)
                 ));
     }
 }
