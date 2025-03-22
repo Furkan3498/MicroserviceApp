@@ -5,9 +5,11 @@ import com.company.payment.entity.enums.PaymentStatus;
 import com.company.payment.entity.enums.PaymentType;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "payments")
@@ -29,10 +31,13 @@ public class PaymentEntity {
     @CreationTimestamp
     private LocalDateTime localDateTime;
 
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
     public PaymentEntity() {
     }
 
-    public PaymentEntity(Long id, Long orderId, String referenceNumber, PaymentType paymentType, PaymentStatus paymentStatus, BigDecimal amount, LocalDateTime localDateTime) {
+    public PaymentEntity(Long id, Long orderId, String referenceNumber, PaymentType paymentType, PaymentStatus paymentStatus, BigDecimal amount, LocalDateTime localDateTime, LocalDateTime updatedAt) {
         this.id = id;
         this.orderId = orderId;
         this.referenceNumber = referenceNumber;
@@ -40,6 +45,7 @@ public class PaymentEntity {
         this.paymentStatus = paymentStatus;
         this.amount = amount;
         this.localDateTime = localDateTime;
+        this.updatedAt = updatedAt;
     }
 
     public Long getId() {
@@ -98,16 +104,38 @@ public class PaymentEntity {
         this.localDateTime = localDateTime;
     }
 
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentEntity that = (PaymentEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     @Override
     public String toString() {
         return "PaymentEntity{" +
                 "id=" + id +
                 ", orderId=" + orderId +
-                ", referenceNumber=" + referenceNumber +
+                ", referenceNumber='" + referenceNumber + '\'' +
                 ", paymentType=" + paymentType +
                 ", paymentStatus=" + paymentStatus +
                 ", amount=" + amount +
                 ", localDateTime=" + localDateTime +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
