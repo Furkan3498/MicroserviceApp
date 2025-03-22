@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import static com.company.payment.entity.enums.ErrorMessage.SERVER_ERROR;
+
 @RestControllerAdvice
 public class ErrorHander {
     @ExceptionHandler(NotFoundException.class)
@@ -19,7 +21,7 @@ public class ErrorHander {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handle(Exception exception) {
-        return new ErrorResponse("Unexpected error occurred. Please try again later");
+        return new ErrorResponse(SERVER_ERROR.getMessage());
     }
 
 }
