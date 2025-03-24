@@ -58,4 +58,8 @@ public enum ProductMapper {
 
 
     }
+
+    public List<ProductResponse> mapToProductResponseDtoList(List<ProductEntity> productList){
+        return productList.stream().map(this::buildProductResponse).toList();
+    }
 }
