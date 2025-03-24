@@ -13,6 +13,7 @@ import com.company.product.responseDto.CommentResponse;
 import com.company.product.responseDto.ProductResponse;
 import com.company.product.service.abstraction.ProductService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static com.company.product.entity.enums.ErrorMessage.INSUFFICIENT_QUANTITY;
@@ -29,10 +31,11 @@ import static com.company.product.mapper.ProductMapper.PRODUCT_MAPPER;
 import static java.lang.String.*;
 
 @Service
-@Slf4j
+
 
 public class ProductServiceImpl implements ProductService {
 
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
     private final ProductRepository productRepository;
     private final CommentRepository commentRepository;
     private final CommentService commentService;
@@ -111,10 +114,11 @@ public class ProductServiceImpl implements ProductService {
 
 
     public List<ProductResponse> getProductByPriceRange(double minPrice, double maxPrice) {
+        log.info("ProductService::getProductNamesByPriceRange started");
 
         List<ProductEntity> productList = getProductList();
 
-
+        log.info("ProductService::getProductNamesByPriceRange finished");
         return productList.stream()
                 .filter(product -> product.getPrice() != null
                         && product.getPrice().compareTo(BigDecimal.valueOf(minPrice)) >= 0
