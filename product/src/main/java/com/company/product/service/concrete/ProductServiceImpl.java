@@ -95,8 +95,14 @@ public class ProductServiceImpl implements ProductService {
 
 
     public  List<ProductResponse> getProductAll() throws Exception{
-        return PRODUCT_MAPPER.
+        List<ProductEntity> productList = getProductAll();
+        return PRODUCT_MAPPER.mapToProductResponseDtoList()
     }
+    private  List<ProductEntity> getProductList(){
+        return (List<ProductEntity>) productRepository.findAll();
+    }
+
+
     }
 
 
