@@ -5,6 +5,8 @@ import com.company.product.RequestDto.ReduceQuantityRequest;
 import com.company.product.responseDto.ProductResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 public interface ProductService {
     void createProduct(CreateProductRequest createProductRequest);

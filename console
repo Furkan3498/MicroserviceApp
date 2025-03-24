@@ -4,3 +4,21 @@ git push origin main
  docker ps
 docker start
  docker stop
+
+
+
+
+
+
+
+Query Parametresi (Request Param) eklemek için:
+
+localhost:9999/v1/products/productByPriceRange
+
+Postman'de Params sekmesine tıklayın.
+
+Aşağıdaki parametreleri girin:
+
+Key: minPrice, Value: 100
+
+Key: maxPrice, Value: 500

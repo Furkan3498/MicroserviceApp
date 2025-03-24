@@ -12,11 +12,16 @@ import com.company.product.repository.ProductRepository;
 import com.company.product.responseDto.CommentResponse;
 import com.company.product.responseDto.ProductResponse;
 import com.company.product.service.abstraction.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.company.product.entity.enums.ErrorMessage.INSUFFICIENT_QUANTITY;
 import static com.company.product.entity.enums.ErrorMessage.PRODUCT_NOT_FOUND;
@@ -24,6 +29,7 @@ import static com.company.product.mapper.ProductMapper.PRODUCT_MAPPER;
 import static java.lang.String.*;
 
 @Service
+@Slf4j
 
 public class ProductServiceImpl implements ProductService {
 
@@ -102,6 +108,21 @@ public class ProductServiceImpl implements ProductService {
         return (List<ProductEntity>) productRepository.findAll();
     }
 
+
+
+    public List<ProductResponse> getProductByPriceRange(double minPrice, double maxPrice) {
+
+        List<ProductEntity> productList = getProductList();
+
+
+        return productList.stream()
+                .filter(product -> product.getPrice() != null
+                        && product.getPrice().compareTo(BigDecimal.valueOf(minPrice)) >= 0
+                        && product.getPrice().compareTo(BigDecimal.valueOf(maxPrice)) <= 0)
+                .map(PRODUCT_MAPPER::buildProductResponse)
+                .sorted(Comparator.comparing(ProductResponse::getPrice).reversed())
+                .collect(Collectors.toList());
+    }
 
     }
 
