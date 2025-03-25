@@ -2,14 +2,14 @@ package com.company.product.responseDto;
 
 import java.time.LocalDateTime;
 
-public class ReviewDTO {
+public class CommentsDTO {
     private Long id;
     private String comment;
     private LocalDateTime createdAt;
     private int rating;
     private Long productId;
 
-    public ReviewDTO(Long id, String comment, LocalDateTime createdAt, int rating, Long productId) {
+    public CommentsDTO(Long id, String comment, LocalDateTime createdAt, int rating, Long productId) {
         this.id = id;
         this.comment = comment;
         this.createdAt = createdAt;

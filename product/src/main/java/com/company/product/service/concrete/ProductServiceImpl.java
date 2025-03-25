@@ -5,14 +5,12 @@ import com.company.product.RequestDto.ReduceQuantityRequest;
 import com.company.product.entity.ProductEntity;
 import com.company.product.exception.InsufficientQuantityException;
 import com.company.product.exception.NotFoundException;
-import com.company.product.repository.CommentRepository;
 import com.company.product.repository.ProductRepository;
 import com.company.product.responseDto.ProductResponse;
-import com.company.product.responseDto.ReviewDTO;
-import com.company.product.service.ReviewServiceImpl;
+import com.company.product.responseDto.CommentsDTO;
+import com.company.product.service.CommentsServiceImpl;
 import com.company.product.service.abstraction.ProductService;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -33,14 +31,10 @@ public class ProductServiceImpl implements ProductService {
 
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
     private final ProductRepository productRepository;
-    private final CommentRepository commentRepository;
-    private final CommentService commentService;
-    private final ReviewServiceImpl reviewService;
+    private final CommentsServiceImpl reviewService;
 
-    public ProductServiceImpl(ProductRepository productRepository, CommentRepository commentRepository, @Lazy CommentService commentService, ReviewServiceImpl reviewService) {
+    public ProductServiceImpl(ProductRepository productRepository,  CommentsServiceImpl reviewService) {
         this.productRepository = productRepository;
-        this.commentRepository = commentRepository;
-        this.commentService = commentService;
         this.reviewService = reviewService;
     }
 
@@ -56,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
 
         log.info("product iD BASLADI started");
 
-        List<ReviewDTO> reviewsByProduct = reviewService.getReviewsByProduct(id);
+        List<CommentsDTO> reviewsByProduct = reviewService.getReviewsByProduct(id);
 
 
       ProductEntity product = productRepository.findById(id).orElseThrow(()-> new NotFoundException(format(PRODUCT_NOT_FOUND.getMessage(),id)));

@@ -2,13 +2,10 @@ package com.company.product.mapper;
 
 import com.company.product.RequestDto.CreateProductRequest;
 import com.company.product.entity.ProductEntity;
-import com.company.product.responseDto.CommentResponse;
 import com.company.product.responseDto.ProductResponse;
-import com.company.product.responseDto.ReviewDTO;
-import com.company.product.service.concrete.CommentService;
+import com.company.product.responseDto.CommentsDTO;
 
 import java.util.List;
-import java.util.function.Function;
 
 public enum ProductMapper {
 
@@ -45,7 +42,7 @@ public enum ProductMapper {
 
 
     }
-    public ProductResponse buildProductResponse(ProductEntity productEntity, List<ReviewDTO> reviewDTO){
+    public ProductResponse buildProductResponse(ProductEntity productEntity, List<CommentsDTO> reviewDTO){
 
         ProductResponse productResponse = new ProductResponse();
         productResponse.setName(productEntity.getName());
@@ -61,21 +58,7 @@ public enum ProductMapper {
 
 
     }
-    public ProductResponse buildProductResponseforComment(ProductEntity productEntity, CommentResponse  commentResponse){
 
-        ProductResponse productResponse = new ProductResponse();
-        productResponse.setName(productEntity.getName());
-        productResponse.setId(productEntity.getId());
-        productResponse.setPrice(productEntity.getPrice());
-        productResponse.setDescription(productEntity.getDescription());
-        productResponse.setQuantity(productEntity.getQuantity());
-
-      //  productResponse.setCommentResponse(commentResponse);
-        return productResponse;
-
-
-
-    }
 
     public List<ProductResponse> mapToProductResponseDtoList(List<ProductEntity> productList){
         return productList.stream().map(this::buildProductResponse).toList();

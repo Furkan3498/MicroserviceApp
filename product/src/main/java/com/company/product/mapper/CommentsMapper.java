@@ -1,20 +1,20 @@
 package com.company.product.mapper;
 
-import com.company.product.entity.Review;
-import com.company.product.responseDto.ReviewDTO;
+import com.company.product.entity.CommentsEntity;
+import com.company.product.responseDto.CommentsDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface ReviewMapper {
-    ReviewMapper INSTANCE = Mappers.getMapper(ReviewMapper.class);
+public interface CommentsMapper {
+    CommentsMapper INSTANCE = Mappers.getMapper(CommentsMapper.class);
 
     @Mapping(source = "product.id", target = "productId")
     @Mapping(source = "user.id", target = "userId")
-    ReviewDTO toDTO(Review review);
+    CommentsDTO toDTO(CommentsEntity review);
 
     @Mapping(source = "productId", target = "product.id")
     @Mapping(source = "userId", target = "user.id")
-    Review toEntity(ReviewDTO reviewDTO);
+    CommentsEntity toEntity(CommentsDTO reviewDTO);
 }

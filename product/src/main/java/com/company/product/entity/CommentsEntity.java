@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reviews")
-public class Review {
+public class CommentsEntity {
 
-    public Review() {
+    public CommentsEntity() {
     }
 
     @Id
@@ -76,7 +76,7 @@ public class Review {
 
 
 
-    public Review(Long id, String comment, LocalDateTime createdAt, int rating, ProductEntity product) {
+    public CommentsEntity(Long id, String comment, LocalDateTime createdAt, int rating, ProductEntity product) {
 
         this.id = id;
         this.comment = comment;

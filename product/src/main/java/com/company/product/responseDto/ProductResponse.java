@@ -1,11 +1,6 @@
 package com.company.product.responseDto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,26 +14,18 @@ public class ProductResponse {
     private BigDecimal price;
     private Integer quantity;
 
-    private List<CommentResponse> commentResponseList;
 
+  private List<CommentsDTO> reviewDTOList;
 
-  private List<ReviewDTO> reviewDTOList;
-
-    public List<ReviewDTO> getReviewDTOList() {
+    public List<CommentsDTO> getReviewDTOList() {
         return reviewDTOList;
     }
 
-    public void setReviewDTOList(List<ReviewDTO> reviewDTOList) {
+    public void setReviewDTOList(List<CommentsDTO> reviewDTOList) {
         this.reviewDTOList = reviewDTOList;
     }
 
-    public List<CommentResponse> getCommentResponseList() {
-        return commentResponseList;
-    }
 
-    public void setCommentResponseList(List<CommentResponse> commentResponseList) {
-        this.commentResponseList = commentResponseList;
-    }
 
     public Long getId() {
         return id;
