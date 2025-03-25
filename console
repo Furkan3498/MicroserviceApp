@@ -22,3 +22,10 @@ Aşağıdaki parametreleri girin:
 Key: minPrice, Value: 100
 
 Key: maxPrice, Value: 500
+
+
+Review Postman
+@PostMapping = localhost:9999/reviews/add?productId=5
+Key: productId, Value: 5
+
+@GetMapping http://localhost:9999/reviews/5
