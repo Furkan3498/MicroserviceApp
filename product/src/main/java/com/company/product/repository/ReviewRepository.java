@@ -16,5 +16,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("SELECT new com.company.product.responseDto.ReviewDTO(r.id, r.comment, r.createdAt, r.rating, r.product.id) FROM Review r WHERE r.product.id = :productId")
     List<ReviewDTO> getReviewsByProduct(@Param("productId") Long productId);
 
+
+
+
+
     }
 

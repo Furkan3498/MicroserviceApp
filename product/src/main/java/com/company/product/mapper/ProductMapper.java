@@ -4,6 +4,7 @@ import com.company.product.RequestDto.CreateProductRequest;
 import com.company.product.entity.ProductEntity;
 import com.company.product.responseDto.CommentResponse;
 import com.company.product.responseDto.ProductResponse;
+import com.company.product.responseDto.ReviewDTO;
 import com.company.product.service.concrete.CommentService;
 
 import java.util.List;
@@ -37,7 +38,24 @@ public enum ProductMapper {
         productResponse.setDescription(productEntity.getDescription());
         productResponse.setQuantity(productEntity.getQuantity());
 
+
       //  productResponse.setCommentResponse(commentResponse);
+        return productResponse;
+
+
+
+    }
+    public ProductResponse buildProductResponse(ProductEntity productEntity, List<ReviewDTO> reviewDTO){
+
+        ProductResponse productResponse = new ProductResponse();
+        productResponse.setName(productEntity.getName());
+        productResponse.setId(productEntity.getId());
+        productResponse.setPrice(productEntity.getPrice());
+        productResponse.setDescription(productEntity.getDescription());
+        productResponse.setQuantity(productEntity.getQuantity());
+        productResponse.setReviewDTOList(reviewDTO);
+
+        //  productResponse.setCommentResponse(commentResponse);
         return productResponse;
 
 

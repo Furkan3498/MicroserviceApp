@@ -2,27 +2,23 @@ package com.company.product.service.concrete;
 
 import com.company.product.RequestDto.CreateProductRequest;
 import com.company.product.RequestDto.ReduceQuantityRequest;
-import com.company.product.entity.CommentEntity;
 import com.company.product.entity.ProductEntity;
 import com.company.product.exception.InsufficientQuantityException;
-import com.company.product.mapper.ProductMapper;
 import com.company.product.exception.NotFoundException;
 import com.company.product.repository.CommentRepository;
 import com.company.product.repository.ProductRepository;
-import com.company.product.responseDto.CommentResponse;
 import com.company.product.responseDto.ProductResponse;
+import com.company.product.responseDto.ReviewDTO;
+import com.company.product.service.ReviewServiceImpl;
 import com.company.product.service.abstraction.ProductService;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static com.company.product.entity.enums.ErrorMessage.INSUFFICIENT_QUANTITY;
@@ -39,11 +35,13 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final CommentRepository commentRepository;
     private final CommentService commentService;
+    private final ReviewServiceImpl reviewService;
 
-    public ProductServiceImpl(ProductRepository productRepository,  CommentRepository commentRepository,@Lazy CommentService commentService) {
+    public ProductServiceImpl(ProductRepository productRepository, CommentRepository commentRepository, @Lazy CommentService commentService, ReviewServiceImpl reviewService) {
         this.productRepository = productRepository;
         this.commentRepository = commentRepository;
         this.commentService = commentService;
+        this.reviewService = reviewService;
     }
 
     @Override
@@ -56,13 +54,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse getProductById(Long id) {
 
+        log.info("product iD BASLADI started");
 
-        return productRepository.findById(id)
-                .map(PRODUCT_MAPPER::buildProductResponse)
-                .orElseThrow(() -> new NotFoundException(
-                        format(PRODUCT_NOT_FOUND.getMessage(),
-                                id)
-                ));
+        List<ReviewDTO> reviewsByProduct = reviewService.getReviewsByProduct(id);
+
+
+      ProductEntity product = productRepository.findById(id).orElseThrow(()-> new NotFoundException(format(PRODUCT_NOT_FOUND.getMessage(),id)));
+       ;
+      return PRODUCT_MAPPER.buildProductResponse(product,reviewsByProduct);
+
 
 
 

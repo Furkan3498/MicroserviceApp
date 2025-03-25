@@ -21,6 +21,17 @@ public class ProductResponse {
 
     private List<CommentResponse> commentResponseList;
 
+
+  private List<ReviewDTO> reviewDTOList;
+
+    public List<ReviewDTO> getReviewDTOList() {
+        return reviewDTOList;
+    }
+
+    public void setReviewDTOList(List<ReviewDTO> reviewDTOList) {
+        this.reviewDTOList = reviewDTOList;
+    }
+
     public List<CommentResponse> getCommentResponseList() {
         return commentResponseList;
     }
