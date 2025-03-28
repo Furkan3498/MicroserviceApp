@@ -9,5 +9,4 @@ public final class ApplicationConstants {
 
     public static final String PRODUCT_ID_IS_REQUIRED ="Product Id is required";
     public static final String NAME_IS_Quantity = "Quantity is required";
-    public static final String NAME_IS_Amount = "Amount is required";
 }

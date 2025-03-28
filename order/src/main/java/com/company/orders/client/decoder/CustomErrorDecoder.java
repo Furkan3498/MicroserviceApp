@@ -21,7 +21,8 @@ public class CustomErrorDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String s, Response response) {
 
-        String errorMessage = CLIENT_ERROR.getMessage();
+        var errorMessage = CLIENT_ERROR.getMessage();
+        var statusCode = response.status();
 
 
         JsonNode jsonNode;
@@ -31,12 +32,12 @@ public class CustomErrorDecoder implements ErrorDecoder {
 
 
         }catch (Exception exception){
-            throw  new CustomFeignException(CLIENT_ERROR.getMessage());
+            throw  new CustomFeignException(statusCode, CLIENT_ERROR.getMessage());
         }
 
         if (jsonNode.has(JsonNodeFıeldName.MESSAGE.getValue()))
             errorMessage = jsonNode.get(JsonNodeFıeldName.MESSAGE.getValue()).asText();
-        return new CustomFeignException(errorMessage);
+        return new CustomFeignException(statusCode, errorMessage);
     }
 
 }
