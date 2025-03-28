@@ -34,8 +34,8 @@ public class CustomErrorDecoder implements ErrorDecoder {
             throw  new CustomFeignException(CLIENT_ERROR.getMessage());
         }
 
-        if (jsonNode.has("message"))
-            errorMessage = jsonNode.get("message").asText();
+        if (jsonNode.has(JsonNodeFıeldName.MESSAGE.getValue()))
+            errorMessage = jsonNode.get(JsonNodeFıeldName.MESSAGE.getValue()).asText();
         return new CustomFeignException(errorMessage);
     }
 
