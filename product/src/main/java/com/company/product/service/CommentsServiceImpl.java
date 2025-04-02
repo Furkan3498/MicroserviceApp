@@ -20,7 +20,6 @@ public class CommentsServiceImpl {
     private final ProductRepository productRepository;
     private final CommentsRepository reviewRepository;
 
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     public CommentsServiceImpl(CommentsDomainService reviewDomainService, ProductRepository productRepository, CommentsRepository reviewRepository) {
         this.reviewDomainService = reviewDomainService;

@@ -10,7 +10,7 @@ import com.company.product.responseDto.ProductResponse;
 import com.company.product.responseDto.CommentsDTO;
 import com.company.product.service.CommentsServiceImpl;
 import com.company.product.service.abstraction.ProductService;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -29,7 +29,7 @@ import static java.lang.String.*;
 
 public class ProductServiceImpl implements ProductService {
 
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
+ //   private static final org.slf4j.Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
     private final ProductRepository productRepository;
     private final CommentsServiceImpl reviewService;
 
@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse getProductById(Long id) {
 
-        log.info("product iD BASLADI started");
+       // log.info("product iD BASLADI started");
 
         List<CommentsDTO> reviewsByProduct = reviewService.getReviewsByProduct(id);
 
@@ -108,11 +108,11 @@ public class ProductServiceImpl implements ProductService {
 
 
     public List<ProductResponse> getProductByPriceRange(double minPrice, double maxPrice) {
-        log.info("ProductService::getProductNamesByPriceRange started");
+     //   log.info("ProductService::getProductNamesByPriceRange started");
 
         List<ProductEntity> productList = getProductList();
 
-        log.info("ProductService::getProductNamesByPriceRange finished");
+   //     log.info("ProductService::getProductNamesByPriceRange finished");
         return productList.stream()
                 .filter(product -> product.getPrice() != null
                         && product.getPrice().compareTo(BigDecimal.valueOf(minPrice)) >= 0
