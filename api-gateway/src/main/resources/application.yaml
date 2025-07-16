@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: api-gatway
+  config:
+    import: configserver:http://localhost:8888
